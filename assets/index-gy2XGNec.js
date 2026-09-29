@@ -142,8 +142,8 @@ max = 67`,Oe=[[`if`,`Single condition`,`Skips block when false`,`bg-indigo-100 t
 }`},{title:`Dangling else`,body:`else binds to the nearest unmatched if. Braces make it explicit.`,bad:`if (marks >= 40)
   if (marks >= 75)
     printf("B\\n");
-  else  // -> inner if!
-    printf("Fail?\\n");`,good:`if (marks >= 40) {
+else  // -> inner if!
+  printf("Fail?\\n");`,good:`if (marks >= 40) {
   if (marks >= 75) {
     printf("B\\n");
   }
