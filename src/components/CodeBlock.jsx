@@ -25,9 +25,9 @@ export default function CodeBlock({
     };
 
     return (
-        <div className="overflow-hidden rounded-xl border border-slate-800 bg-slate-950 shadow-lg">
+        <div className="overflow-hidden rounded-2xl border border-white/10 bg-slate-950 shadow-xl shadow-slate-950/20 ring-1 ring-slate-950">
             {/* window bar */}
-            <div className="flex items-center justify-between bg-slate-900 px-4 py-2">
+            <div className="flex items-center justify-between border-b border-white/10 bg-slate-900 px-4 py-2.5">
                 <div className="flex items-center gap-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
                     <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
@@ -43,9 +43,9 @@ export default function CodeBlock({
                     <button
                         type="button"
                         onClick={handleCopy}
-                        className="rounded bg-slate-800 px-2 py-0.5 text-[11px] font-medium text-slate-300 transition hover:bg-slate-700"
+                        className="rounded-md bg-slate-800 px-2.5 py-1 text-[11px] font-semibold text-slate-300 ring-1 ring-white/10 transition hover:bg-slate-700 hover:text-white active:scale-95"
                     >
-                        {copied ? "Copied!" : "Copy"}
+                        {copied ? "✓ Copied" : "Copy"}
                     </button>
                 </div>
             </div>
@@ -55,8 +55,8 @@ export default function CodeBlock({
             </pre>
             {/* optional output strip */}
             {showOutput && (
-                <div className="border-t border-slate-800 bg-slate-900/60 px-4 py-2 font-mono text-xs text-green-300">
-                    <span className="text-slate-500">Output → </span>
+                <div className="border-t border-white/10 bg-emerald-950/40 px-4 py-2.5 font-mono text-xs leading-relaxed whitespace-pre-line text-emerald-300">
+                    <span className="font-sans font-bold text-emerald-500/80">▷ Output -&gt; </span>
                     {showOutput}
                 </div>
             )}

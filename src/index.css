@@ -18,6 +18,15 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Kill font ligatures everywhere so code reads exactly as typed
+   (>= stays >=, == stays ==, -> stays ->, ... stays ...) */
+*,
+*::before,
+*::after {
+  font-variant-ligatures: none !important;
+  font-feature-settings: "liga" 0, "clig" 0, "calt" 0 !important;
+}
+
 /* Slide enter animation */
 @keyframes slide-in {
   from {
@@ -32,6 +41,60 @@ body {
 
 .slide-enter {
   animation: slide-in 220ms ease-out;
+}
+
+/* Cool ambient extras */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 2.2s ease-in-out infinite;
+}
+
+/* Slim dark scrollbars for editor + output */
+.dark-scroll::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.dark-scroll::-webkit-scrollbar-track {
+  background: #020617;
+}
+.dark-scroll::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 8px;
+  border: 2px solid #020617;
+}
+.dark-scroll::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Blinking caret for terminal */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+.terminal-caret {
+  animation: blink 1s step-end infinite;
+}
+
+/* Playground overlay editor: highlighted code sits behind a transparent
+   textarea. Metrics (font/padding/line-height) must match the textarea. */
+.playground-editor pre[class*="language-"] {
+  background: transparent !important;
+}
+
+.playground-editor textarea {
+  font-variant-ligatures: none !important;
+  font-feature-settings: "liga" 0, "clig" 0, "calt" 0 !important;
 }
 
 /* Prism overrides: keep dark code island consistent, no ligatures

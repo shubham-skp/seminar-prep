@@ -9,6 +9,7 @@ import Slide05NestedIf from "./slides/Slide05NestedIf";
 import Slide06Ladder from "./slides/Slide06Ladder";
 import Slide07Switch from "./slides/Slide07Switch";
 import Slide08Summary from "./slides/Slide08Summary";
+import Slide09Playground from "./slides/Slide09Playground";
 
 const slides = [
   Slide01Title,
@@ -19,6 +20,7 @@ const slides = [
   Slide06Ladder,
   Slide07Switch,
   Slide08Summary,
+  Slide09Playground,
 ];
 
 function indexFromHash() {
@@ -52,9 +54,16 @@ function App() {
     return () => window.removeEventListener("hashchange", onHashChange);
   }, [current]);
 
-  // Keyboard: ← → Space PgUp PgDn Home End
+  // Keyboard: Left/Right Space PgUp PgDn Home End (ignored while typing)
   useEffect(() => {
     const onKey = (e) => {
+      const t = e.target;
+      const typing =
+        t instanceof HTMLElement &&
+        (t.tagName === "INPUT" ||
+          t.tagName === "TEXTAREA" ||
+          t.isContentEditable);
+      if (typing) return; // let inputs / editor handle their own keys
       if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
         e.preventDefault();
         next();
@@ -76,8 +85,14 @@ function App() {
   const ActiveSlide = slides[current];
   const meta = slidesMeta[current];
 
+  const isDark = Boolean(meta.dark);
+
   return (
-    <div className="min-h-screen bg-linear-to-br from-sky-50 via-indigo-50 to-white">
+    <div
+      className={`min-h-screen ${
+        isDark ? "bg-slate-950" : "bg-linear-to-br from-sky-50 via-indigo-50 to-white"
+      }`}
+    >
       <SlideShell
         key={current}
         kicker={`Slide ${current + 1} • ${meta.title}`}
@@ -88,6 +103,8 @@ function App() {
         onBack={back}
         onNext={next}
         onDot={goTo}
+        dark={isDark}
+        accent={meta.accent}
       >
         <ActiveSlide onNext={next} onBack={back} />
       </SlideShell>
