@@ -38,7 +38,7 @@ const PITFALLS = [
     {
         title: "Dangling else",
         body: "else binds to the nearest unmatched if. Braces make it explicit.",
-        bad: `if (marks >= 40)\n  if (marks >= 75)\n    printf("B\\n");\n  else  // -> inner if!\n    printf("Fail?\\n");`,
+        bad: `if (marks >= 40)\n  if (marks >= 75)\n    printf("B\\n");\nelse  // -> inner if!\n  printf("Fail?\\n");`,
         good: `if (marks >= 40) {\n  if (marks >= 75) {\n    printf("B\\n");\n  }\n} else {\n  printf("Fail\\n");\n}`,
     },
     {
